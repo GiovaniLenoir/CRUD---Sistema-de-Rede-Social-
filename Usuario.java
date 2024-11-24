@@ -21,8 +21,8 @@ public class Usuario {
         this.email = email;
         this.senha = senha;
         this.dataCadastro = dataCadastro;
-        this.amigos = amigos;
-        this.posts = posts;
+        this.amigos = new ArrayList<>();
+        this.posts = new ArrayList<>();
     }
 
     public Integer getId() {
