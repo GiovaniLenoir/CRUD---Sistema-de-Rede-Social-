@@ -12,14 +12,14 @@ public class Post {
     private List<Usuario> curtidas;
     private List<Comentario> comentarios;
 
-    public Post(Integer id, autor usuario, String conteudo, LocalDateTime dataPublicacao,
+    public Post(Integer id, Usuario autor, String conteudo, LocalDateTime dataPublicacao,
                 List<Usuario> curtidas, List<Comentario> comentarios) {
         this.id = id;
         this.autor = autor;
         this.conteudo = conteudo;
         this.dataPublicacao = dataPublicacao;
-        this.curtidas = new ArrayList<>();
-        this.comentarios = new ArrayList<>();
+        this.curtidas = curtidas;
+        this.comentarios = comentarios;
     }
 
     public Integer getId() {
