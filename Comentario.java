@@ -84,5 +84,4 @@ public class Comentario {
     public int hashCode() {
         return Objects.hash(id, autor, conteudo, dataComentario, Post);
     }
-    
 }
