@@ -1,8 +1,8 @@
-package com.redesocial.gerenciador;
+package gerenciador;
 
-import com.redesocial.modelo.Post;
-import com.redesocial.modelo.Comentario;
-import com.redesocial.modelo.Usuario;
+import modelo.Post;
+import modelo.Comentario;
+import modelo.Usuario;
 
 import java.util.List;
 import java.util.ArrayList;

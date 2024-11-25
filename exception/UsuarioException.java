@@ -1,4 +1,4 @@
-package com.redesocial.exception;
+package exception;
 
     public class UsuarioException extends Exception {
         public UsuarioException(String message) {

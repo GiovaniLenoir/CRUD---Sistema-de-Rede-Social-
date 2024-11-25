@@ -1,4 +1,4 @@
-package com.redesocial.exception;
+package exception;
 
     public class PostException extends Exception {
         public PostException(String message) {

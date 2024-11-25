@@ -1,7 +1,7 @@
-package com.redesocial.ui;
+package ui;
 
-import com.redesocial.gerenciador.GerenciadorUsuarios;
-import com.redesocial.modelo.Usuario;
+import gerenciador.GerenciadorUsuarios;
+import modelo.Usuario;
 
 import java.util.Scanner;
 

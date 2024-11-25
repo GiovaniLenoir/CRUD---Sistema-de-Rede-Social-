@@ -1,7 +1,7 @@
-package com.redesocial.gerenciador;
+package gerenciador;
 
-import com.redesocial.modelo.Usuario;
-import com.redesocial.exception.UsuarioException;
+import modelo.Usuario;
+import exception.UsuarioException;
 
 import java.util.ArrayList;
 import java.util.List;
