@@ -4,5 +4,8 @@ package com.redesocial.exception;
         public ValidacaoException(String message) {
             super(message);
         }
+        public ValidacaoException(String message, Throwable causa) {
+            super(message, causa);
+        }
     }
 
