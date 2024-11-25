@@ -1,8 +1,9 @@
+package com.redesocial.modelo;
+
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-package com.redesocial.modelo.Post;
 
 public class Post {
     private Integer id;

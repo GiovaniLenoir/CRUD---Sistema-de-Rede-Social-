@@ -1,8 +1,9 @@
+package com.redesocial.modelo;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.ArrayList;
-package com.redesocial.modelo.Usuario;
 
 public class Usuario {
    private Integer id;

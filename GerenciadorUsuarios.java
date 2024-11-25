@@ -1,8 +1,10 @@
-import java.util.List;
-import java.util.ArrayList;
+package com.redesocial.gerenciador;
+
 import com.redesocial.modelo.Usuario;
 import com.redesocial.exception.UsuarioException;
-package com.redesocial.gerenciador;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GerenciadorUsuarios {
     private List<Usuario> usuarios;
