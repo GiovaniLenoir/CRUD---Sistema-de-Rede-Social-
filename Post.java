@@ -17,9 +17,9 @@ public class Post {
         this.id = id;
         this.autor = autor;
         this.conteudo = conteudo;
-        this.dataPublicacao = dataPublicacao;
-        this.curtidas = curtidas;
-        this.comentarios = comentarios;
+        this.dataPublicacao = LocalDateTime.now();
+        this.curtidas = new ArrayList<>();
+        this.comentarios = new ArrayList<>();
     }
 
     public Integer getId() {

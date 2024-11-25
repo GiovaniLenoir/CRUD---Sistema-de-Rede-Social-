@@ -1,6 +1,7 @@
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.ArrayList;
 
 public class Comentario {
     private Integer id;
@@ -14,8 +15,8 @@ public class Comentario {
         this.id = id;
         this.autor = autor;
         this.conteudo = conteudo;
-        this.dataComentario = dataComentario;
-        this.Post = post;
+        this.dataComentario = LocalDateTime.now();
+        this.Post = new ArrayList<>();
     }
 
     public Integer getId() {

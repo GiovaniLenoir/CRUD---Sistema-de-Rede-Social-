@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Optional;
 import com.redesocial.modelo.Usuario;
+import com.redesocial.exception.UsuarioException;
 package com.redesocial.gerenciador;
 
 public class GerenciadorUsuarios {
@@ -13,55 +13,45 @@ public class GerenciadorUsuarios {
         this.proximoId = 1;
         }
 
-        public void cadastrar(Usuario usuario) {
-            validarUsuario(usuario);
-            usuario.setId(proximoId);
-            proximoId++;
-            usuarios.add(usuario);
-        }
+    public void cadastrar(Usuario usuario) {
+        validarUsuario(usuario);
+        usuario.setId(proximoId++);
+        usuarios.add(usuario);
+    }
 
-        public Usuario buscarPorId(int id) {
-            for (Usuario usuario : usuarios) {
-                if (usuario.getId() == id) {
-                    return usuario;
-                }
+    public Usuario buscarPorId(int id) {
+        return usuarios.stream()
+                .filter(usuario -> usuario.getId() == id)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Usuario buscarPorUsername(String username) {
+        return usuarios.stream()
+                .filter(usuario -> usuario.getUsername().equals(username))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public List<Usuario> buscarPorNome(String nome) {
+        List<Usuario> encontrados = new ArrayList<>();
+        for (Usuario usuario : usuarios) {
+            if (usuario.getNome().contains(nome)) {
+                encontrados.add(usuario);
             }
-            return null;
         }
+        return encontrados;
+    }
 
-        public Usuario buscarPorUsername(String username) {
-            for (Usuario usuario : usuarios) {
-                if (usuario.getUsername().equals(username)) {
-                    return usuario;
-                }
-            }
-            return null;
-        }
-
-        public List<Usuario> buscarPorNome(String nome) {
-            List<Usuario> encontrados = new ArrayList<>();
-            for (Usuario usuario : usuarios) {
-                if (usuario.getNome().toLowerCase().contains(nome.toLowerCase())) {
-                    encontrados.add(usuario);
-                }
-            }
-            return encontrados;
-        }
-
-        public boolean atualizar(Usuario usuario) {
-            Usuario usuarioExistente = buscarPorId(usuario.getId());
-            if (usuarioExistente != null) {
-                usuarioExistente.setNome(usuario.getNome());
-                usuarioExistente.setUsername(usuario.getUsername());
-                usuarioExistente.setEmail(usuario.getEmail());
-                usuarioExistente.setSenha(usuario.getSenha());
-                usuarioExistente.setDataCadastro(usuario.getDataCadastro());
-                usuarioExistente.setAmigos(usuario.getAmigos());
-                usuarioExistente.setPosts(usuario.getPosts());
+    public boolean atualizar(Usuario usuario) {
+        for (int i = 0; i < usuarios.size(); i++) {
+            if (usuarios.get(i).getId().equals(usuario.getId())) {
+                usuarios.set(i, usuario);
                 return true;
             }
-            return false;
         }
+        return false;
+    }
 
         public boolean deletar(int id) {
             Usuario usuario = buscarPorId(id);
@@ -72,39 +62,34 @@ public class GerenciadorUsuarios {
             return false;
         }
 
-        public void adicionarAmizade(int idUsuario1, int idUsuario2) {
-            Usuario usuario1 = buscarPorId(idUsuario1);
-            Usuario usuario2 = buscarPorId(idUsuario2);
-
-            if (usuario1 != null && usuario2 != null && usuario1 != usuario2) {
-                usuario1.adicionarAmigo(usuario2);
-                usuario2.adicionarAmigo(usuario1);
-            }
-        }
-
-        public void removerAmizade(int idUsuario1, int idUsuario2) {
-            Usuario usuario1 = buscarPorId(idUsuario1);
-            Usuario usuario2 = buscarPorId(idUsuario2);
-
-            if (usuario1 != null && usuario2 != null) {
-                usuario1.removerAmigo(usuario2);
-                usuario2.removerAmigo(usuario1);
-            }
-        }
-
-        private void validarUsuario(Usuario usuario) {
-            if (usuario.getNome() == null || usuario.getNome().isEmpty()) {
-                throw new IllegalArgumentException("Nome do usuário não pode ser vazio");
-            }
-            if (usuario.getUsername() == null || usuario.getUsername().isEmpty()) {
-                throw new IllegalArgumentException("Username não pode ser vazio");
-            }
-            if (usuario.getEmail() == null || usuario.getEmail().isEmpty()) {
-                throw new IllegalArgumentException("Email não pode ser vazio");
-            }
-            if (usuario.getSenha() == null || usuario.getSenha().isEmpty()) {
-                throw new IllegalArgumentException("Senha não pode ser vazia");
-            }
+    public void adicionarAmizade(int idUsuario1, int idUsuario2) {
+        Usuario usuario1 = buscarPorId(idUsuario1);
+        Usuario usuario2 = buscarPorId(idUsuario2);
+        if (usuario1 != null && usuario2 != null) {
+            usuario1.adicionarAmigo(usuario2);
+            usuario2.adicionarAmigo(usuario1);
         }
     }
+
+    public void removerAmizade(int idUsuario1, int idUsuario2) {
+        Usuario usuario1 = buscarPorId(idUsuario1);
+        Usuario usuario2 = buscarPorId(idUsuario2);
+        if (usuario1 != null && usuario2 != null) {
+            usuario1.removerAmigo(usuario2);
+            usuario2.removerAmigo(usuario1);
+        }
+    }
+
+    private void validarUsuario(Usuario usuario) {
+        if (buscarPorUsername(usuario.getUsername()) != null) {
+            throw new UsuarioException("Username já existe.");
+        }
+        if (usuario.getEmail().isEmpty() || !usuario.getEmail().contains("@")) {
+            throw new UsuarioException("Email inválido.");
+        }
+        if (usuario.getSenha().length() < 6) {
+            throw new UsuarioException("Senha deve ter pelo menos 6 caracteres.");
+        }
+    }
+}
 
