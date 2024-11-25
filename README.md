@@ -4,6 +4,8 @@
 
 +nome: Giovani Lenoir
 
++RA:1794280
+
 # 📋 Funcionalidades
 
 Este é um sistema básico de rede social que permite:
