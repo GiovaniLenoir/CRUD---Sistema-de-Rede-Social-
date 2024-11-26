@@ -129,6 +129,7 @@ public class Usuario {
         }
     }
     public void adicionarPost(Post post) {
-        this.posts.add(post);
-    }
+          posts.add(post);
+
+      }
 }
