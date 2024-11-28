@@ -2,8 +2,15 @@ package ui;
 
 import gerenciador.GerenciadorUsuarios;
 import modelo.Usuario;
+import exception.UsuarioException;
+import util.MenuUsuario;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 
     public class MenuPrincipal {
@@ -15,14 +22,13 @@ import java.util.Scanner;
             this.scanner = new Scanner(System.in);
         }
         public void exibirMenu() {
-            int opcao;
-            do {
+            while (true) {
                 System.out.println("\n=== Menu Principal ===");
-                System.out.println("1. Fazer Login");
-                System.out.println("2. Cadastrar Usuário");
+                System.out.println("1. Login");
+                System.out.println("2. Cadastrar novo usuário");
                 System.out.println("3. Sair");
                 System.out.print("Escolha uma opção: ");
-                opcao = scanner.nextInt();
+                int opcao = scanner.nextInt();
                 scanner.nextLine();
 
                 switch (opcao) {
@@ -34,12 +40,11 @@ import java.util.Scanner;
                         break;
                     case 3:
                         System.out.println("Saindo...");
-                        break;
+                        return;
                     default:
                         System.out.println("Opção inválida. Tente novamente.");
-                        break;
                 }
-            } while (opcao != 3);
+            }
         }
         private void fazerLogin() {
             System.out.print("\nDigite o username: ");
@@ -56,19 +61,44 @@ import java.util.Scanner;
         }
         private void cadastrarUsuario() {
             System.out.println("\n=== Cadastro de Usuário ===");
-            System.out.print("Nome: ");
+            System.out.print("Digite seu nome: ");
             String nome = scanner.nextLine();
-            System.out.print("Username: ");
+            System.out.print("Digite seu username: ");
             String username = scanner.nextLine();
-            System.out.print("Email: ");
+            System.out.print("Digite seu email: ");
             String email = scanner.nextLine();
-            System.out.print("Senha: ");
+            System.out.print("Digite sua senha (mínimo 6 caracteres): ");
             String senha = scanner.nextLine();
 
-            Usuario novoUsuario = new Usuario(nome, username, email, senha);
-            gerenciadorUsuarios.cadastrar(novoUsuario);
-            System.out.println("Usuário cadastrado com sucesso!");
+            if (!validarEmail(email)) {
+                System.out.println("Email inválido! Tente novamente.");
+                return;
+            }
+
+            if (senha.length() < 6) {
+                System.out.println("Senha muito curta! A senha deve ter no mínimo 6 caracteres.");
+                return;
+            }
+
+            Usuario novoUsuario = new Usuario(nome, username, email, senha, LocalDateTime.now(), new ArrayList<>(), new ArrayList<>());
+
+            try {
+                // Tentando cadastrar o usuário
+                gerenciadorUsuarios.cadastrar(novoUsuario);
+                System.out.println("Usuário cadastrado com sucesso!");
+            } catch (UsuarioException e) {
+                // Exibindo mensagem de erro caso a exceção seja capturada
+                System.out.println("Erro ao cadastrar usuário: " + e.getMessage());
+            }
         }
+        private boolean validarEmail(String email) {
+            String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(email);
+            return matcher.matches();
+        }
+
+
         private void exibirMenuLogado(Usuario usuario) {
             int opcao;
             do {
