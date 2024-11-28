@@ -5,6 +5,7 @@ import modelo.Usuario;
 
 import java.util.Scanner;
 
+
     public class MenuPrincipal {
         private GerenciadorUsuarios gerenciadorUsuarios;
         private Scanner scanner;
