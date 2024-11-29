@@ -62,7 +62,7 @@ import java.util.Scanner;
             System.out.print("\nDigite o conteúdo do seu post: ");
             String conteudo = scanner.nextLine();
             Post novoPost = new Post(usuarioLogado, conteudo);
-            gerenciadorPosts.criar(novoPost);
+            usuarioLogado.adicionarPost(novoPost);
             System.out.println("Post criado com sucesso!");
         }
         private void verPerfil() {

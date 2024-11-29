@@ -24,6 +24,10 @@ public class Post {
         this.comentarios = new ArrayList<>();
     }
 
+    public Post(Usuario usuarioLogado, String conteudo) {
+
+    }
+
     public Integer getId() {
         return id;
     }
