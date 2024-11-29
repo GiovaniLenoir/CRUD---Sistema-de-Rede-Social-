@@ -1,0 +1,20 @@
+src/
+├── com/
+│   └── redesocial/
+│       ├── Main.java
+│       ├── modelo/
+│       │   ├── Usuario.java
+│       │   ├── Post.java
+│       │   └── Comentario.java
+│       ├── gerenciador/
+│       │   ├── GerenciadorUsuarios.java
+│       │   └── GerenciadorPosts.java
+│       ├── ui/
+│       │   ├── MenuPrincipal.java
+│       │   └── MenuUsuario.java
+│       ├── util/
+│       │   └── BCryptUtil.java
+│       └── exception/
+│           ├── UsuarioException.java
+│           ├── PostException.java
+│           └── ValidacaoException.java
