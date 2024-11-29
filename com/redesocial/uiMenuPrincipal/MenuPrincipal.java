@@ -1,9 +1,8 @@
-package ui;
+package com.redesocial.uiMenuPrincipal;
 
-import gerenciador.GerenciadorUsuarios;
-import modelo.Usuario;
-import exception.UsuarioException;
-import util.MenuUsuario;
+import com.redesocial.exception.UsuarioException;
+import com.redesocial.gerenciador.GerenciadorUsuarios;
+import com.redesocial.modelo.Usuario;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ import java.util.regex.Pattern;
             this.gerenciadorUsuarios = new GerenciadorUsuarios();
             this.scanner = new Scanner(System.in);
         }
-        public void exibirMenu() {
+        public void exibirMenu() throws UsuarioException {
             while (true) {
                 System.out.println("\n=== Menu Principal ===");
                 System.out.println("1. Login");
@@ -59,7 +58,7 @@ import java.util.regex.Pattern;
                 System.out.println("\nUsuário ou senha inválidos. Tente novamente.");
             }
         }
-        private void cadastrarUsuario() {
+        private void cadastrarUsuario() throws UsuarioException {
             System.out.println("\n=== Cadastro de Usuário ===");
             System.out.print("Digite seu nome: ");
             String nome = scanner.nextLine();
@@ -80,16 +79,10 @@ import java.util.regex.Pattern;
                 return;
             }
 
-            Usuario novoUsuario = new Usuario(nome, username, email, senha, LocalDateTime.now(), new ArrayList<>(), new ArrayList<>());
+            Usuario novoUsuario = new Usuario(nome, username, email, senha);
 
-            try {
-                // Tentando cadastrar o usuário
-                gerenciadorUsuarios.cadastrar(novoUsuario);
-                System.out.println("Usuário cadastrado com sucesso!");
-            } catch (UsuarioException e) {
-                // Exibindo mensagem de erro caso a exceção seja capturada
-                System.out.println("Erro ao cadastrar usuário: " + e.getMessage());
-            }
+            gerenciadorUsuarios.cadastrar(novoUsuario);
+            System.out.println("Usuário cadastrado com sucesso!");
         }
         private boolean validarEmail(String email) {
             String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";

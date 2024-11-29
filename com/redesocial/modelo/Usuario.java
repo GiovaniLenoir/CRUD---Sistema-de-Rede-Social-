@@ -1,5 +1,7 @@
-package modelo;
+package com.redesocial.modelo;
 
+import com.redesocial.gerenciador.GerenciadorUsuarios;
+import com.redesocial.uiMenuUsuario.MenuUsuario;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

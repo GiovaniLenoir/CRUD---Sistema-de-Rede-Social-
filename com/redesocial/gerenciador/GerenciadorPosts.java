@@ -1,14 +1,14 @@
-package gerenciador;
+package com.redesocial.gerenciador;
 
-import modelo.Post;
-import modelo.Comentario;
-import modelo.Usuario;
+import com.redesocial.modelo.Post;
+import com.redesocial.modelo.Comentario;
+import com.redesocial.modelo.Usuario;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
 
-    public class GerenciadorPosts {
+public class GerenciadorPosts {
         private List<Post> posts;
         private int proximoId;
 
@@ -54,13 +54,16 @@ import java.util.Optional;
                 post.removerCurtida(usuario);
             }
         }
-        public void comentar(Comentario comentario) {
-            Post post = buscarPorId(comentario.getPost().getId());
+        public void comentar(int idpost, Comentario comentario) {
+            Post post = buscarPorId(idpost);
             if (post != null) {
-                post.adicionarComentario(comentario);
+                System.out.println("Comentario adicionado" + comentario.getConteudo());
+            }else {
+                System.out.println("Poste não encontrado");
             }
         }
-        public boolean deletar(int id) {
+
+    public boolean deletar(int id) {
             Post post = buscarPorId(id);
             if (post != null) {
                 posts.remove(post);

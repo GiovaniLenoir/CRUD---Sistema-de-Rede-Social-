@@ -1,8 +1,7 @@
-package gerenciador;
+package com.redesocial.gerenciador;
 
-import modelo.Usuario;
-import exception.UsuarioException;
-
+import com.redesocial.modelo.Usuario;
+import com.redesocial.exception.UsuarioException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,7 @@ public class GerenciadorUsuarios {
         this.proximoId = 1;
         }
 
-    public void cadastrar(Usuario usuario) {
+    public void cadastrar(Usuario usuario) throws UsuarioException {
         validarUsuario(usuario);
         usuario.setId(proximoId++);
         usuarios.add(usuario);
@@ -82,7 +81,7 @@ public class GerenciadorUsuarios {
         }
     }
 
-    private void validarUsuario(Usuario usuario) {
+    private void validarUsuario(Usuario usuario) throws UsuarioException {
         if (buscarPorUsername(usuario.getUsername()) != null) {
             throw new UsuarioException("Username já existe.");
         }

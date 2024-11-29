@@ -1,8 +1,8 @@
-package ui;
-import gerenciador.GerenciadorPosts;
-import gerenciador.GerenciadorUsuarios;
-import modelo.Post;
-import modelo.Usuario;
+package com.redesocial.uiMenuUsuario;
+import com.redesocial.gerenciador.GerenciadorPosts;
+import com.redesocial.gerenciador.GerenciadorUsuarios;
+import com.redesocial.modelo.Post;
+import com.redesocial.modelo.Usuario;
 
 import java.util.List;
 import java.util.Scanner;

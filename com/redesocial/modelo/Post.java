@@ -1,5 +1,6 @@
-package modelo;
+package com.redesocial.modelo;
 
+import com.redesocial.gerenciador.GerenciadorPosts;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -115,4 +116,5 @@ public class Post {
         return Objects.hash(id, autor, conteudo, dataPublicacao, curtidas, comentarios);
     }
 
-}
+    }
+
